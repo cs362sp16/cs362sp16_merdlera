@@ -1,0 +1,1 @@
+I refactored the first five cards (adventurer, council room, feast, mine, remodel) into their own seperate functions. Then I make calls to these functions in the switch statement in cardEffect. The code was mostly copied straight out of the case statements, only some of the variables needed to be initialized in cardAdventurer.
