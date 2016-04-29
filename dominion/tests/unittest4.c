@@ -11,7 +11,8 @@ int main(int argc, char *argv[]){
     int numPlayers = 2;
     int supplyPos = 1;
     int kingdomCards[] = {
-        smithy,adventurer,
+        smithy,
+        adventurer,
         gardens,
         embargo,
         cutpurse,

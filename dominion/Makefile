@@ -25,6 +25,10 @@ unittestresults.out: $(tests/unittest*.c) $(tests/cardtest*.c)  assert.o dominio
 	gcc -o tests/unittest2 tests/unittest2.c -g assert.o dominion.o rngs.o $(CFLAGS)
 	gcc -o tests/unittest3 tests/unittest3.c -g assert.o dominion.o rngs.o $(CFLAGS)
 	gcc -o tests/unittest4 tests/unittest4.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/cardtest1 tests/cardtest1.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/cardtest2 tests/cardtest2.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/cardtest3 tests/cardtest3.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/cardtest4 tests/cardtest4.c -g assert.o dominion.o rngs.o $(CFLAGS)
 	rm -f unittestresults.out
 	./tests/unittest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
@@ -34,8 +38,16 @@ unittestresults.out: $(tests/unittest*.c) $(tests/cardtest*.c)  assert.o dominio
 	gcov dominion.c >> unittestresults.out
 	./tests/unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	./tests/cardtest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./tests/cardtest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./tests/cardtest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./tests/cardtest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 
 all: playdom player unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittesting.out
+	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out

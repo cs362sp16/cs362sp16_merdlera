@@ -1,0 +1,18 @@
+Bugs:
+- When trying to test getCost, I encountered a segfault. This could have been because
+  of bad testing parameters, however.
+
+Coverage:
+- I was able to reach about 26% test coverage in my tests.
+- This is a very alarming figure considering only 8 functions were directly tested.
+  It tells us that the code is very tightly coupled, because over a quarter of the 
+  code is being run by calling these 8 functions.
+
+Impressions:
+- Unit testing this program is very difficult. This is because the code is not well 
+  documented, which makes it difficult to know exactly what parameters a certain
+  function should take, what assumptions are made about the arguments, and what
+  the function should return.
+- Testing this code is interesting. It is like spell checking a thesis written 
+  in another language. Sometimes you have to assert basic principles of a 
+  function just to learn what you should actually be testing.
