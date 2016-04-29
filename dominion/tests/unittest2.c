@@ -1,27 +1,36 @@
-/******************************************************************************
- * Unit Test 2
- * Checks to see if player has 5 cards at start
- * Primary tested function: numHandCards()
- ******************************************************************************/
+/*************************************************
+* Unit Test 2
+* Function: buyCard
+*************************************************/
 #include <stdio.h>
 #include "assert.h"
 #include "../dominion.h"
 
 int main(int argc, char *argv[]){
-    // Game init variables
+    // Set up game
     int numPlayers = 2;
-    int kingdomCards[] = {smithy,adventurer,gardens,embargo,cutpurse,mine,
-                          ambassador,outpost,baron,tribute};
+    int supplyPos = 1;
+    int kingdomCards[] = {
+        smithy,adventurer,
+        gardens,
+        embargo,
+        cutpurse,
+        mine,
+        ambassador,
+        outpost,
+        baron,
+        tribute
+    };
     int seed = 1234;
-    struct gameState g1;
-    struct gameState *game1 = &g1;
+    struct gameState game;
+    initializeGame(numPlayers, kingdomCards, seed, &game);
 
-    // Init unshuffled and unshuffled game
-    initializeGame(numPlayers, kingdomCards, seed, game1);
+    // Set testing parameters
+    game.numBuys = 0;
 
-    // Check player hand at start
-    int result = numHandCards(game1);
-    myAssertTrue((result == 5), "Player has 5 cards at start.");
+    int result = buyCard(supplyPos, &game);
+
+    myAssertTrue(result == -1, "Cannot buy card if no buys left.");
 
     checkAsserts();
 }

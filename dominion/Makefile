@@ -20,34 +20,22 @@ player: player.c interface.o
 assert.o: $(tests/assert.h) $(tests/assert.c)
 	gcc -c tests/assert.c -g $(CFLAGS)
 
-tests: $(tests/unittest*.c) $(tests/cardtest*.c) assert.o dominion.o
-	gcc -o unittest1 tests/unittest1.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o unittest2 tests/unittest2.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o unittest3 tests/unittest3.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o unittest4 tests/unittest4.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o cardtest1 tests/cardtest1.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o cardtest2 tests/cardtest2.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o cardtest3 tests/cardtest3.c -g assert.o dominion.o rngs.o $(CFLAGS)
-	gcc -o cardtest4 tests/cardtest4.c -g assert.o dominion.o rngs.o $(CFLAGS)
+unittestresults.out: $(tests/unittest*.c) $(tests/cardtest*.c)  assert.o dominion.o
+	gcc -o tests/unittest1 tests/unittest1.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/unittest2 tests/unittest2.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/unittest3 tests/unittest3.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/unittest4 tests/unittest4.c -g assert.o dominion.o rngs.o $(CFLAGS)
 	rm -f unittestresults.out
-	./unittest1 >> unittestresults.out
+	./tests/unittest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-	./unittest2 >> unittestresults.out
+	./tests/unittest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-	./unittest3 >> unittestresults.out
+	./tests/unittest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-	./unittest4 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-	./cardtest1 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-	./cardtest2 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-	./cardtest3 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-	./cardtest4 >> unittestresults.out
+	./tests/unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
-all: playdom player tests
+all: playdom player unittestresults.out
 
 clean:
 	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittesting.out

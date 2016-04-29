@@ -447,25 +447,29 @@ int buyCard(int supplyPos, struct gameState *state) {
 	
 	if (state->numBuys < 1){
 		if (DEBUG)
-		printf("You do not have any buys leftn");
-		return -1;
-		} else if (supplyCount(supplyPos, state) <1){
-		if (DEBUG)
-		printf("There are not any of that type of card leftn");
-		return -1;
-		} else if (state->coins < getCost(supplyPos)){
-		if (DEBUG)
-		printf("You do not have enough money to buy that. You have %d coins.n", state->coins);
-		return -1;
-		} else {
-		state->phase=1;
-		//state->supplyCount[supplyPos]--;
-		gainCard(supplyPos, state, 0, who); //card goes in discard, this might be wrong.. (2 means goes into hand, 0 goes into discard)
-		
-		state->coins = (state->coins) - (getCost(supplyPos));
-		state->numBuys--;
-		if (DEBUG)
-		printf("You bought card number %d for %d coins. You now have %d buys and %d coins.n", supplyPos, getCost(supplyPos), state->numBuys, state->coins);
+			printf("You do not have any buys leftn");
+			return -1;
+		} 
+		else if (supplyCount(supplyPos, state) <1){
+			if (DEBUG)
+				printf("There are not any of that type of card leftn");
+				return -1;
+		} 
+		else if (state->coins < getCost(supplyPos)){
+			if (DEBUG)
+				printf("You do not have enough money to buy that. You have %d coins.n", state->coins);
+				return -1;
+		} 
+		else {
+			state->phase=1;
+			//state->supplyCount[supplyPos]--;
+			gainCard(supplyPos, state, 0, who); //card goes in discard, this might be wrong.. (2 means goes into hand, 0 goes into discard)
+			
+			state->coins = (state->coins) - (getCost(supplyPos));
+			state->numBuys--;
+			if (DEBUG) {
+				printf("You bought card number %d for %d coins. You now have %d buys and %d coins.n", supplyPos, getCost(supplyPos), state->numBuys, state->coins);
+			}
 	}
 	
 	//state->discard[who][state->discardCount[who]] = supplyPos;

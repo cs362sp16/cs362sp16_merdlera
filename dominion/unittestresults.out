@@ -1,41 +1,20 @@
-UNIT TEST PASSED.
+Unit test passed.
 File 'dominion.c'
 Lines executed:15.96% of 564
 Creating 'dominion.c.gcov'
 
-UNIT TEST PASSED.
+Unit test passed.
 File 'dominion.c'
 Lines executed:16.67% of 564
 Creating 'dominion.c.gcov'
 
-UNIT TEST PASSED.
+Unit test passed.
 File 'dominion.c'
-Lines executed:17.91% of 564
+Lines executed:17.02% of 564
 Creating 'dominion.c.gcov'
 
-UNIT TEST PASSED.
+Unit test passed.
 File 'dominion.c'
-Lines executed:18.26% of 564
-Creating 'dominion.c.gcov'
-
-UNIT TEST PASSED.
-File 'dominion.c'
-Lines executed:22.16% of 564
-Creating 'dominion.c.gcov'
-
-UNIT TEST PASSED.
-File 'dominion.c'
-Lines executed:26.06% of 564
-Creating 'dominion.c.gcov'
-
-ASSERT FAILED: Three cards drawn.
-UNIT TEST FAILED.
-File 'dominion.c'
-Lines executed:26.77% of 564
-Creating 'dominion.c.gcov'
-
-UNIT TEST PASSED.
-File 'dominion.c'
-Lines executed:27.48% of 564
+Lines executed:17.02% of 564
 Creating 'dominion.c.gcov'
 
