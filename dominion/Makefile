@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CFLAGS = -std=c99 -Wall -fpic -coverage -lm
+TEST_SEED = 42
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -49,15 +50,18 @@ unittestresults.out: $(tests/unittest*.c) $(tests/cardtest*.c)  assert.o dominio
 
 randomtest: assert.o dominion.o
 	rm -f randomtestadventurer.out randomtestcard1.out
-	# gcc -o tests/randomtestadventurer tests/randomtestadventurer.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/randomtestadventurer tests/randomtestadventurer.c -g assert.o dominion.o rngs.o $(CFLAGS)
 	gcc -o tests/randomtestcard1 tests/randomtestcard1.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	gcc -o tests/randomtestcard2 tests/randomtestcard2.c -g assert.o dominion.o rngs.o $(CFLAGS)
 
-	# ./tests/randomtestadventurer 203 >> randomtestadventurer.out
-	# gcov -f dominion.c >> randomtestadventurer.out
-	./tests/randomtestcard1 203 >> randomtestcard1.out
+	./tests/randomtestadventurer $(TEST_SEED) >> randomtestadventurer.out
+	gcov -f dominion.c >> randomtestadventurer.out
+	./tests/randomtestcard1 $(TEST_SEED) >> randomtestcard1.out
 	gcov -f dominion.c >> randomtestcard1.out
+	./tests/randomtestcard2 $(TEST_SEED) >> randomtestcard2.out
+	gcov -f dominion.c >> randomtestcard2.out
 
 all: playdom player unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out
+	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer tests/randomtestcard1 tests/randomtestcard2 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out randomtestadventurer.out randomtestcard1.out randomtestcard2.out

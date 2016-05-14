@@ -1,5 +1,11 @@
 adventurer:
 	To develop the random test of this card, I randomized the gamestate's
 
+	I had a lot of trouble testing this function due to segfaults. I was able to use gdb to run a backtrace on the function,
+	and found that the segfault was occurring when it "discards all cards in play that have been drawn".
+
 council_room:
 	I was able to achieve 100% coverage for this function.
+
+smithy:
+	This function had not been refactored, and was still in the large switch statement in cardEffect.
