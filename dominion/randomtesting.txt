@@ -1,11 +1,11 @@
-adventurer:
-	To develop the random test of this card, I randomized the gamestate's
+To run random tests, run "make randomtest".
 
+adventurer:
 	I had a lot of trouble testing this function due to segfaults. I was able to use gdb to run a backtrace on the function,
-	and found that the segfault was occurring when it "discards all cards in play that have been drawn".
+	and found that the segfault was occurring when it "discards all cards in play that have been drawn". The statement "state->discard[currentPlayer][state->discardCount[currentPlayer]++]" was trying to access an array value way out of bounds. I suspect this was due to the random testing extreme bounds, and I was unable to fix the test to get it to pass.
 
 council_room:
-	I was able to achieve 100% coverage for this function.
+	I was able to achieve 100% coverage for this function. It only requires a quick 10000 iterations in order to get it to reach this coverage level. My unit tests were not able to reach this level of coverage, simply because they were not hitting the right parameters. However, I feel that unit tests are able to catch the edge cases that are obvious to the 	developer as they write the code, and are suitable for testing those cases. Random testing is better suited for brute force testing the functions, which is still important.
 
 smithy:
-	This function had not been refactored, and was still in the large switch statement in cardEffect.
+	This function had not been refactored, and was still in the large switch statement in cardEffect. However, I was able to isolate  the state changes that it makes to the gameState and effectively test them.
