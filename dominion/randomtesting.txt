@@ -1,0 +1,5 @@
+adventurer:
+	To develop the random test of this card, I randomized the gamestate's
+
+council_room:
+	I was able to achieve 100% coverage for this function.

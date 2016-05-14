@@ -1,6 +1,6 @@
 /*************************************************
 * Random Card Test 1
-* Card: adventurer
+* Card: council_room
 *************************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
 	        savedBuyCount = state.numBuys;
 
 	        // Play adventurer card
-	        result = cardEffect(adventurer, NULL, NULL, NULL, &state, 0, NULL);
+	        result = cardEffect(council_room, NULL, NULL, NULL, &state, 0, NULL);
 
 	        // Check affected values against saved ones
 	        myAssertTrue((result == 0), "Card effect function.");

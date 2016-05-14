@@ -12,9 +12,9 @@ void myAssertTrue(int result, const char *msg) {
 
 void checkAsserts(){
     if (!myAssertError){
-        printf("Unit test passed.\n");
+        printf("Test passed.\n");
     }
     else {
-        printf("Unit test failed.\n");
+        printf("Test failed.\n");
     }
 }
