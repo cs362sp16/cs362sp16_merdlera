@@ -47,7 +47,13 @@ unittestresults.out: $(tests/unittest*.c) $(tests/cardtest*.c)  assert.o dominio
 	./tests/cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
+randomtest: assert.o dominion.o
+	rm -f randomtestadventurer.out
+	gcc -o tests/randomtestadventurer tests/randomtestadventurer.c -g assert.o dominion.o rngs.o $(CFLAGS)
+	./tests/randomtestadventurer 203 >> randomtestadventurer.out
+	gcov dominion.c >> randomtestadventurer.out
+
 all: playdom player unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out
+	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out
