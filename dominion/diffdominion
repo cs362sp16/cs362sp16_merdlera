@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Requires absoloute paths in order to work
-
 start_dir=`pwd`
 path1="$1"
 path2="$2"
@@ -18,6 +16,8 @@ make clean
 make testdominion.out
 ./tests/testdominion $seed >> temp.out
 gcov dominion.c >> temp.out
+
+cd $start_dir
 
 diff -s -y $path1/temp.out $path2/temp.out >> diff
 result=`tail -n 1 diff`

@@ -11,7 +11,7 @@
 #define K_MIN adventurer
 #define K_MAX treasure_map
 
-int _CARD[] = {
+int kingdom_cards[] = {
     curse,
     estate,
     duchy,
@@ -41,52 +41,18 @@ int _CARD[] = {
     treasure_map
 };
 
-// char* enumToStr(int card){
-//     switch(card){
-//         case adventurer: return "Adventurer";
-// 		case council_room: return "Council Room";
-// 		case feast: return "Feast";
-// 		case great_hall: return "Great Hall";
-// 		case mine: return "Mine";
-// 		case remodel: return "Remodel";
-// 		case smithy: return "Smithy";
-// 		case curse: return "Curse";
-// 		case estate: return "Estate";
-// 		case duchy: return "Duchy";
-// 		case ambassador: return "Ambassador";
-// 		case cutpurse: return "Cutpurse";
-// 		case embargo: return "Embargo";
-// 		case outpost: return "Outpost";
-// 		case salvager: return "Salvager";
-// 		case sea_hag: return "Sea Hag";
-// 		case province: return "Province";
-// 		case copper: return "Copper";
-// 		case silver: return "Silver";
-// 		case gold: return "Gold";
-// 		case gardens: return "Gardens";
-// 		case village: return "Village";
-// 		case baron: return "Baron";
-// 		case minion: return "Minion";
-// 		case steward: return "Steward";
-// 		case tribute: return "Tribute";
-// 		case treasure_map: return "Treasure Map";
-// 		default: return 0;
-//     }
-// }
-
-// Fill deck with unique cards
-void initDeck(int *cards){
-    int _CARDPICKED[27] = {0};
+// Initialize deck with cards
+void initializeDeck(int *cards){
+    int selected_cards[27] = {0};
 
     for (int i = 0; i < 10; i++){
         while (1) {
-            int candidate = _CARD[rand() % 27];
+            int rand_card = kingdom_cards[rand() % 27];
 
-            // If card not already selected
-            if(_CARDPICKED[candidate] == 0){
+            if(selected_cards[rand_card] == 0){
                 // Set card and mark as selected
-                cards[i] = candidate;
-                _CARDPICKED[candidate] = 1;
+                cards[i] = rand_card;
+                selected_cards[rand_card] = 1;
 
                 break;
             }
@@ -95,14 +61,14 @@ void initDeck(int *cards){
 }
 
 // Setup new game
-void initGameParams(int *numPlayers, int *cards, int seed, struct gameState *state){
-    *numPlayers = (rand() % 3) + 2; // Between 2-4 players
-    initDeck(cards);
-    initializeGame(*numPlayers, cards, seed, state);
+void initializeGameParameters(int *number_of_players, int *cards, int seed, struct gameState *state){
+    *number_of_players = (rand() % 3) + 2; // Between 2-4 players
+    initializeDeck(cards);
+    initializeGame(*number_of_players, cards, seed, state);
 }
 
 // Play round
-void playRound(struct gameState *state){
+void playGame(struct gameState *state){
     int player = whoseTurn(state);
 
     while (state->numActions > 0){
@@ -140,7 +106,6 @@ void playRound(struct gameState *state){
                         playCard(handPos, (rand() % (1 - 26) + 26), -1, -1, state);
                         break;
                     case feast:
-                        //playCard(handPos, (rand() % (duchy + 1 - 26) + 26), -1, -1, state);
                         break;
                     case minion:
                         playCard(handPos, 1, -1, -1, state);
@@ -170,6 +135,7 @@ void playRound(struct gameState *state){
 
         updateCoins(player, state, NULL);
         available_coins = state->coins;
+
         while(available_coins > 0){
             int tmpCard = rand() % 27;
             int cost = getCost(tmpCard);
@@ -196,7 +162,7 @@ int main(int argc, char *argv[]){
     seed = strtol(argv[1], NULL, 10);
     srand(time(&seed));
 
-    printf("[Beginning Dominion tests]\n");
+    printf("[Dominion Testing Start]\n");
     for (int i = 0; i < ITERATIONS; i++) {
         if (i == 0) {
             printf("%0.2f%% complete.", ((i + 1) / (float)ITERATIONS) * 100);
@@ -204,15 +170,13 @@ int main(int argc, char *argv[]){
             printf("\r%0.2f%% complete.", ((i + 1) / (float)ITERATIONS) * 100);
         }
 
-        // Setup new game
         struct gameState state;
-        int numPlayers = 0;
+        int number_of_players = 0;
         int cards[10] = {0};
-        initGameParams(&numPlayers, cards, seed, &state);
+        initializeGameParameters(&number_of_players, cards, seed, &state);
 
-        // Play until finished
         while (!isGameOver(&state)){
-            playRound(&state);
+            playGame(&state);
         }
     }
 

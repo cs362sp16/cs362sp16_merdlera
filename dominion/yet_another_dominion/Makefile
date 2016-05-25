@@ -69,4 +69,4 @@ testdominion.out: $(tests/testdominion.c) clean dominion.o
 all: playdom player unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer tests/randomtestcard1 tests/randomtestcard2 tests/testdominion testdominion_coverage.out testdominion.out player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out randomtestadventurer.out randomtestcard1.out randomtestcard2.out temp_one.out
+	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer tests/randomtestcard1 tests/randomtestcard2 tests/testdominion testdominion_coverage.out testdominion.out player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out randomtestadventurer.out randomtestcard1.out randomtestcard2.out temp.out
