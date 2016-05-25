@@ -77,18 +77,15 @@ void playGame(struct gameState *state){
         int card = 0;
         int available_coins = 0;
 
-        /* Play card phase */
-
-        // Calculate number of actions available
+        // Calculate the number of actions available
         for (int i = 0; i < numHandCards(state); i++) {
             if(state->hand[player][i] >= K_MIN && state->hand[player][i] <= K_MAX) {
                 actionCards++;
             }
         }
 
-        // If actions available
+        // If there are actions available
         if(actionCards > 0) {
-            // Pick random card in hand
             handPos = rand() % state->handCount[player];
             card = state->hand[player][handPos];
 
@@ -131,8 +128,6 @@ void playGame(struct gameState *state){
 
         }
 
-        /* Play buy phase */
-
         updateCoins(player, state, NULL);
         available_coins = state->coins;
 
@@ -153,7 +148,7 @@ void playGame(struct gameState *state){
 int main(int argc, char *argv[]){
     time_t seed = NULL;
 
-    // Check argument for seed
+    // Check command line arguments
     if(argc != 2){
         perror("Usage: ./testdominion [seed]\n");
         return 1;
