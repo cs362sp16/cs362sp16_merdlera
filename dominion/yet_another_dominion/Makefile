@@ -61,7 +61,7 @@ randomtest: assert.o dominion.o
 	./tests/randomtestcard2 $(TEST_SEED) >> randomtestcard2.out
 	gcov -f dominion.c >> randomtestcard2.out
 
-testdominion: $(tests/testdominion.c) clean dominion.o
+testdominion.out: $(tests/testdominion.c) clean dominion.o
 	gcc -o tests/testdominion tests/testdominion.c -g dominion.o rngs.o $(CFLAGS)
 	./tests/testdominion $(TEST_SEED) >> testdominion.out
 	gcov dominion.c >> testdominion.out
@@ -69,4 +69,4 @@ testdominion: $(tests/testdominion.c) clean dominion.o
 all: playdom player unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer tests/randomtestcard1 tests/randomtestcard2 tests/testdominion testdominion_coverage.out testdominion.out player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out randomtestadventurer.out randomtestcard1.out randomtestcard2.out temp_two.out
+	rm -f *.o playdom.exe playdom test.exe test player tests/unittest1 tests/unittest2 tests/unittest3 tests/unittest4 tests/*.o tests/cardtest1 tests/cardtest2 tests/cardtest3 tests/cardtest4 tests/randomtestadventurer tests/randomtestcard1 tests/randomtestcard2 tests/testdominion testdominion_coverage.out testdominion.out player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM unittestresults.out randomtestadventurer.out randomtestcard1.out randomtestcard2.out temp_one.out
