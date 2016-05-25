@@ -1,0 +1,10 @@
+When comparing two implementations of Dominion using my diffdominion Bash script, I was able to consistantly
+achieve a different output between the two programs. I believe this is because of the nature of random testing
+used in the testdominion.c program; the game state is randomized, therefore the both programs will run
+differently. I was also getting different test coverage for each implementation's test, therefore the gcov
+output was different. It is hard to say which implementation is more correct, because there are too many
+variables in testing. This is not an ideal case for differential testing because we do not have an
+implementation that we know is 100% correct to test against and find differences. The highest code coverage
+that I was able to achieve on my own implementation was 78%, while in the same run the other Dominion program
+reached 67%. This is not enough to assure correctness of either program, and the random test generator needs
+to be improved to hit specific functions, such as adventurer card, which had very low percent coverage.
