@@ -1,0 +1,9 @@
+There was a bug in the refactored implementation of cardAdventurer(). Almost 50% of the time,
+calling this function would result in a segmentation fault. This bug was exposed by the random
+tester written for Assigment 4. In order to fix this bug, I used gdb to follow the trace back to the
+pointer error. The bug was caused by attempting to access an array out of bounds on line 34.
+
+Some of Agans' Principles that were used were:
+  - Change one thing at a time: Only altered one line at a time and tested one input at a time in gdb.
+  - Keep an audit trail: Used git to track progress.
+  - Get a fresh view: Left for 20 minutes, then returned to find the bug source.

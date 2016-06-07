@@ -1,0 +1,57 @@
+Summary:
+
+Tarantula seemed like the most interesting testing method for this assignment, as I have never used
+anything like it previously. It was ran against the test file randomtestcard1.c, which runs for 1000 iterations
+with a seed of 2.
+
+Because the test case was failing, lines that run in every test implementation are marked as suspicious,
+due to the fact that they are present in 100% of the test cases as well. The gcov report below shows that
+the lines are being run 1000 times, except for lines 682 and 684. These lines are responsible for incrementing
+the number of coins the player has and discarding the current card.
+
+       1000:  677:int cardSalvager(struct gameState *state, int currentPlayer, int handPos, int choice1) {
+          -:  678:
+       1000:  679:   state->numBuys++;
+       1000:  680:   if (choice1) {
+          -:  681:      //gain coins equal to trashed card
+        900:  682:      state->coins = state->coins + getCost( handCard(choice1, state) );
+          -:  683:      //trash card
+        900:  684:      discardCard(choice1, currentPlayer, state, 1);
+          -:  685:   }
+          -:  686:
+       1000:  687:   discardCard(handPos, currentPlayer, state, 0);
+       1000:  688:   return 0;
+          -:  689:}
+
+The problem lies with the if conditional, which checks that choice1 does not equal 0. However, it should
+be checking the card number, not the hand position as it is now. That is why the tests are failing and
+the lines are not executing, because for some test cases the card is at hand position 0, and thus skips
+over the conditional.
+
+Below is the refactoring of the code, which adds a condition to the if statement to check if choice1 is
+simply greater or equal to zero, which will cause the two test cases to pass. This allows the current card
+to have any hand position greater than 0, which is within the rules of the game.
+
+    if (choice1 >= 0) {
+      state->coins = state->coins + getCost( handCard(choice1, state) );
+      discardCard(choice1, currentPlayer, state, 1);
+    }
+
+Below is the new output from gcov, indicating that all lines are being executed and there are no suspicious
+lines. The reason there are no suspicious lines is because all lines are being executed and there are no
+failing test cases.
+
+       1000:  677:int cardSalvager(struct gameState *state, int currentPlayer, int handPos, int choice1) {
+          -:  678:   //+1 buy
+       1000:  679:   state->numBuys++;
+       1000:  680:   if (choice1) {
+          -:  681:      //gain coins equal to trashed card
+       1000:  682:      state->coins = state->coins + getCost( handCard(choice1, state) );
+          -:  683:      //trash card
+       1000:  684:      discardCard(choice1, currentPlayer, state, 1);
+          -:  685:   }
+          -:  686:   //discard card
+       1000:  687:   discardCard(handPos, currentPlayer, state, 0);
+       1000:  688:   return 0;
+          -:  689:}
+          -:  690:
